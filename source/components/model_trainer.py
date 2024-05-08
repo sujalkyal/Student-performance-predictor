@@ -48,7 +48,52 @@ class ModelTrainer:
                 "Decision Tree Regressor": DecisionTreeRegressor()
             }
 
-            model_report:dict=evaluate_models(X_train=X_train,y_train=y_train,X_test=X_test,y_test=y_test,models=models)
+            params={
+                "Random Forest":{
+                    'n_estimators':[50,80,100,150],
+                    'criterion':['absolute_error','squared_error','poisson','friedman_mse'],
+                    'max_depth':[3,5,8,10],
+                    'min_samples_split':[2,3,4,5]
+                },
+                "AdaBoost Regressor":{
+                    'learning_rate':[0.001,0.01, 0.1, 0.2, 0.5,1,2],
+                    'loss':['linear','square','exponential']
+                },
+                "XGB Regressor":{
+                    'lambda':[0.1,0.2,0.5,1,2,5,10],
+                    'alpha':[0.1,0.2,0.5,1,2,5,10],
+                    'learning_rate' : [0.0001, 0.001, 0.01, 0.1, 0.2, 0.3]
+                },
+                "CatBoost Regressor":{
+                    'depth'         : [6,8,10],
+                  'learning_rate' : [0.0001, 0.001, 0.01, 0.1, 0.2, 0.3],
+                  'iterations'    : [30, 50, 100,150]
+                },
+                "Gradient Boosting Regressor":{
+                    #'loss':['squared_error','absolute_error','huber','quantile'],
+                    'learning_rate': [0.0001, 0.001, 0.01, 0.1, 0.2, 0.3],
+                    'n_estimators':[50,80,100,150],
+                    #'criterion':['friedman_mse','squared_error'],
+                    'min_samples_split':[2,3,4,5],
+                    'max_depth':[3,5,8,10],
+                    'alpha':[0.5,0.7,0.9,0.98]
+                },
+                "Linear Regression":{
+                },
+                "KNeighbors Regressor":{
+                    'n_neighbors':[3,5,6,7,9,10],
+                    'weights':['uniform','distance']
+                },
+                "Decision Tree Regressor":{
+                    'criterion':['squared_error','friedman_mse','absolute_error','poisson'],
+                    'splitter':['best','random'],
+                    'max_depth':[3,5,7,9],
+                    'min_samples_split':[2,3,4,5]
+                }
+            }
+
+            model_report:dict=evaluate_models(X_train=X_train,y_train=y_train,X_test=X_test,y_test=y_test,
+                                              models=models,params=params)
 
             #to get the best model score from the dictionary
             best_model_score=max(sorted(model_report.values()))
