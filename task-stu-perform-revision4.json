@@ -1,5 +1,5 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:ap-south-1:381492106400:task-definition/task-stu-perform:2",
+    "taskDefinitionArn": "arn:aws:ecs:ap-south-1:381492106400:task-definition/task-stu-perform:4",
     "containerDefinitions": [
         {
             "name": "stu-perform-container",
@@ -7,7 +7,7 @@
             "cpu": 0,
             "portMappings": [
                 {
-                    "name": "8080-tcp-5000",
+                    "name": "8080-tcp-8080",
                     "containerPort": 8080,
                     "hostPort": 8080,
                     "protocol": "tcp",
@@ -16,8 +16,10 @@
             ],
             "essential": true,
             "environment": [],
+            "environmentFiles": [],
             "mountPoints": [],
             "volumesFrom": [],
+            "ulimits": [],
             "logConfiguration": {
                 "logDriver": "awslogs",
                 "options": {
@@ -25,7 +27,8 @@
                     "awslogs-group": "/ecs/task-stu-perform",
                     "awslogs-region": "ap-south-1",
                     "awslogs-stream-prefix": "ecs"
-                }
+                },
+                "secretOptions": []
             },
             "systemControls": []
         }
@@ -33,7 +36,7 @@
     "family": "task-stu-perform",
     "executionRoleArn": "arn:aws:iam::381492106400:role/ecsTaskExecutionRole",
     "networkMode": "awsvpc",
-    "revision": 2,
+    "revision": 4,
     "volumes": [],
     "status": "ACTIVE",
     "requiresAttributes": [
@@ -76,7 +79,7 @@
         "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
     },
-    "registeredAt": "2024-05-08T18:02:17.992Z",
+    "registeredAt": "2024-05-11T14:30:37.412Z",
     "registeredBy": "arn:aws:iam::381492106400:root",
     "tags": []
 }
